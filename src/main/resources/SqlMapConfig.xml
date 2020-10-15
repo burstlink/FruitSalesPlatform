@@ -3,12 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-    <settings>
-        <setting name="lazyLoadingEnabled" value="true" />
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-    </settings>
-
+<!-- 全局setting配置按需添加 -->
+<!--  配置别名  -->
     <typeAliases>
-        <package name="com.springmvclearn.entity" />
+        <packeage name="com.springmvclearn.entity"/>
     </typeAliases>
 </configuration>
