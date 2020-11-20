@@ -13,7 +13,7 @@ public abstract class BaseController {
     // 自定义数据绑定 日期转换
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }

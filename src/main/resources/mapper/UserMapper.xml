@@ -8,7 +8,7 @@
         <!-- 主键-->
         <id property="userid" column="userid" javaType="VARCHAR"/>
         <!-- 一般属性-->
-        <result property="userName" column="userName"/>
+        <result property="username" column="username"/>
         <result property="password”" column="password”"/>
         <result property="name" column="name"/>
         <result property="telephone" column="telephone"/>
@@ -17,6 +17,52 @@
     <select id="get" parameterType="string" resultMap="userRM">
         select * from user where userid=#{userid}
     </select>
-    
-    <select id=""
+
+    <!-- 查询 -->
+    <select id="find" parameterType="map" resultMap="userRM">
+        select * from user
+        <where>
+            <if test="username!=null">AND username=#{username}</if>
+            <if test="password!=null">AND password=#{password}</if>
+            <if test="name!=null">AND name=#{name}</if>
+            <if test="telephone!=null">AND telephone=#{telephone}</if>
+        </where>
+    </select>
+
+    <!-- 插入数据  -->
+    <insert id="insert" parameterType="com.springmvclearn.entity.User">
+        insert into user
+        (userid, username, password, name, telephone)
+        value
+        (
+            #{userid,jdbcType=VARCHAR},
+            #{username,jdbcType=VARCHAR},
+            #{password,jdbcType=VARCHAR},
+            #{name,jdbcType=VARCHAR},
+            #{telephone,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!-- 修改数据  -->
+    <update id="update" parameterType="com.springmvclearn.entity.User">
+        update user
+        <set>
+            <if test="password!=null">password=#{password,jdbcType=VARCHAR},</if>
+            <if test="name!=null">#{name,jdbcType=VARCHAR},</if>
+            <if test="telephone!=null">#{telephone,jdbcType=VARCHAR}</if>
+        </set>
+        where userid=#{userid}
+    </update>
+    <!-- 删除一条 -->
+    <delete id="deleteById" parameterType="string">
+        delete from user where userid=#{userid}
+    </delete>
+
+    <!-- 删除多条 (一维字符串数组的形式)-->
+    <delete id="delete" parameterType="string">
+        delete from user where userid in
+        <foreach collection="array" item="userid" open="(" close=")" separator=",">
+            #{userid}
+        </foreach>
+    </delete>
 </mapper>

@@ -10,7 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        return true;
+        String url = request.getRequestURI();
+        if (!(url.contains("Login") || url.contains("login") || url.contains("register"))) {
+            if (request.getSession().getAttribute("user") != null) {
+                return true;
+            }else {
+                if ((url.contains("css") || url.contains("js") || url.contains("images"))) {
+                    return true;
+                }else {
+                    response.sendRedirect(request.getContextPath()+ "/user/toLogin.action");
+                }
+
+            }
+        } else {
+            return true;
+        }
+        return false;
     }
 
     @Override

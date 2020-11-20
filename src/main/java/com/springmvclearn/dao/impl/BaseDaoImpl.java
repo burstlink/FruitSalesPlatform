@@ -2,7 +2,6 @@ package com.springmvclearn.dao.impl;
 
 import com.springmvclearn.dao.BaseDao;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +9,7 @@ import java.util.Map;
 
 public abstract class BaseDaoImpl<T> extends SqlSessionDaoSupport implements BaseDao<T> {
 
+    // 命名空间
     private String ns;
 
     public String getNs() {
@@ -21,8 +21,7 @@ public abstract class BaseDaoImpl<T> extends SqlSessionDaoSupport implements Bas
     }
 
     public List<T> find(Map map) {
-        List<T> olist = this.getSqlSession().selectList(ns + ".find", map);
-        return olist;
+        return this.getSqlSession().selectList(ns + ".find", map);
     }
 
     public T get(Serializable id) {

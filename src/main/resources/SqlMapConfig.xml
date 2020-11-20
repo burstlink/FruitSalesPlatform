@@ -6,6 +6,6 @@
 <!-- 全局setting配置按需添加 -->
 <!--  配置别名  -->
     <typeAliases>
-        <packeage name="com.springmvclearn.entity"/>
+        <package name="com.springmvclearn.entity"/>
     </typeAliases>
 </configuration>
